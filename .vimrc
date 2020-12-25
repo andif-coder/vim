@@ -8,6 +8,7 @@ set incsearch " Display search results when you enter search content
 " set t_Co=256 " Open 256 color
 set backspace=indent,eol,start " Backspace key can go back to the previous line
 set autoindent " Automatic alignment
+set ignorecase " case insensitive
 
 
 " ==================================
