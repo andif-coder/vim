@@ -1,123 +1,100 @@
-syntax on " Automatic syntax highlighting 
-set tabstop=4 " Set table width = 4
+syntax enable " Automatic syntax highlighting 
+set tabstop=2 " Set table width = 2
 set nocompatible " Turn off vi compatibility mode
 set number " Show line number
 set cursorline " Highlight current line
 set hlsearch " Highlight matched text
 set incsearch " Display search results when you enter search content
-" set t_Co=256 " Open 256 color
+set t_Co=256 " Open 256 color
 set backspace=indent,eol,start " Backspace key can go back to the previous line
 set autoindent " Automatic alignment
 set ignorecase " case insensitive
+filetype on " Open file type detection
+let mapleader=" " " Set <leader> = <space>
+" Pre table
+nnoremap <leader>n :tabp<CR> 
+" Next table
+nnoremap <leader>m :tabn<CR> 
+" Close all tables except for current
+nnoremap <leader>b :tabo<CR> 
+" Close current table
+nnoremap <leader>c :tabc<CR> 
 
+" Jump to the next match and place it in the center of the screen
+nnoremap = nzz
+" Jump to the pre match and place it in the center of the screen
+nnoremap - Nzz
 
-" ==================================
-" Begin set color
-" ==================================
-syntax enable
-set background=light
-let g:solarized_termcolors=256
-colorscheme solarized
-" ==================================
-" End set color
-" ==================================
+" plugin
+call plug#begin('~/.vim/plugged')
+	" fzf plugin
+	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+	Plug 'junegunn/fzf.vim'
+	" taglist plugin
+	Plug 'yegappan/taglist'
+	" YouCompleteMe
+	Plug 'Valloric/YouCompleteMe'
+	" nerdtree
+	Plug 'preservim/nerdtree'
+	" air-line
+	Plug 'vim-airline/vim-airline'
+	" fugitive
+	Plug 'tpope/vim-fugitive'
+call plug#end()
 
-" ==================================
-" Begin set statusline
-" ==================================
-" :h mode() to see all modes
-let g:currentmode={
-	\ 'n'      : 'N ',
-	\ 'no'     : 'N¡-Operator Pending ',
-	\ 'v'      : 'V ',
-	\ 'V'      : 'V-Line ',
-	\ '\<C-V>' : 'V-Block ',
-	\ 's'      : 'Select ',
-	\ 'S'      : 'S-Line ',
-	\ '\<C-S>' : 'S-Block ',
-	\ 'i'      : 'I ',
-	\ 'R'      : 'R ',
-	\ 'Rv'     : 'V-Replace ',
-	\ 'c'      : 'Command ',
-	\ 'cv'     : 'Vim Ex ',
-	\ 'ce'     : 'Ex ',
-	\ 'r'      : 'Prompt ',
-	\ 'rm'     : 'More ',
-	\ 'r?'     : 'Confirm ',
-	\ '!'      : 'Shell ',
-	\ 't'      : 'Terminal '
-\}
+" fzf configure
+nnoremap <C-p> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
 
-function! Getcurrentmode()
-	if (get(g:currentmode, mode(), '') == '')
-		return 'V-Block'
-	endif
-	return get(g:currentmode, mode(), '')
-endfunction
+" taglist configure
+let Tlist_Ctags_Cmd = '/usr/bin/ctags' 
+let Tlist_Show_One_File = 1        " Do not display tags of multiple files at the same time, only display the current file
+let Tlist_Exit_OnlyWindow = 1      " If the taglist window is the last window, exit vim
+let Tlist_Use_Right_Window = 1     " Display the taglist window in the right window
+nnoremap <F2> :! ctags -R *<CR>
+nnoremap <F3> :Tlist<CR>
 
-" Automatically change the statusline color depending on mode
-function! ChangeStatuslineColor()
-	if (mode() =~# '\v(n|no)')
-  		exe 'hi! StatusLine ctermfg=002'
-	elseif (mode() =~# '\v(v|V)' || Getcurrentmode() ==# 'V-Block' || get(g:currentmode, mode(), '') ==# 't')
-		exe 'hi! StatusLine ctermfg=005'
-	elseif (mode() ==# 'i')
-		exe 'hi! StatusLine ctermfg=004'
-	else
-		exe 'hi! StatusLine ctermfg=006'
-	endif
-	return ''
-endfunction
-" Find out current buffer's size and output it.
-function! FileSize()
-	let bytes = getfsize(expand('%:p'))
-	if (bytes >= 1024)
-		let kbytes = bytes / 1024
-	endif
-	if (exists('kbytes') && kbytes >= 1000)
-		let mbytes = kbytes / 1000
-	endif
-	if bytes <= 0
-		return '0'
-	endif
-	if (exists('mbytes'))
-		return mbytes . 'MB '
-	elseif (exists('kbytes'))
-		return kbytes . 'KB '
-	else
-		return bytes . 'B '
-	endif
-endfunction
+" YouCompleteMe configure
+" Configure default conf.py path
+let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/ycmd/tests/clangd/testdata/extra_conf/.ycm_extra_conf.py'
+" 打开vim时不再询问是否加载ycm_extra_conf.py配置
+let g:ycm_confirm_extra_conf=0
+set completeopt=longest,menu
+" 是否开启语义补全
+let g:ycm_seed_identifiers_with_syntax=1
+" 是否在注释中也开启补全
+let g:ycm_complete_in_comments=1
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+" 开始补全的字符数
+let g:ycm_min_num_of_chars_for_completion=2
+" 补全后自动关机预览窗口
+let g:ycm_autoclose_preview_window_after_completion=1
+" 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_cache_omnifunc=0
+" 字符串中也开启补全
+let g:ycm_complete_in_strings = 1
+" 离开插入模式后自动关闭预览窗口
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" 映射按键,没有这个会拦截掉tab, 导致其他插件的tab不能用.
+let g:ycm_key_list_select_completion = ['<c-n>', '<Down>']  
+let g:ycm_key_list_previous_completion = ['<c-p>', '<Up>']
+" 回车即选中当前项
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+" 上下左右键行为
+inoremap <expr> <Down>     pumvisible() ? '\<C-n>' : '\<Down>'
+inoremap <expr> <Up>       pumvisible() ? '\<C-p>' : '\<Up>'
+inoremap <expr> <PageDown> pumvisible() ? '\<PageDown>\<C-p>\<C-n>' : '\<PageDown>'
+inoremap <expr> <PageUp>   pumvisible() ? '\<PageUp>\<C-p>\<C-n>' : '\<PageUp>'
 
-function! ReadOnly()
-	if &readonly || !&modifiable
-		return '[RO]'
-	else
-		return ''
-endfunction
+" scheme
+colorscheme onedark
 
-
-set laststatus=2                                         " Always show status line
-set statusline=
-set statusline+=%{ChangeStatuslineColor()}               " Changing the statusline color
-set statusline+=%0*\ %{toupper(Getcurrentmode())}   " Current mode
-set statusline+=%8*\ [%n]                                " buffernr
-set statusline+=%8*\ %<%F%{ReadOnly()}%m\ %w\        " File+path
-set statusline+=%#warningmsg#
-set statusline+=%*
-set statusline+=%9*\ %=                                  " Space
-set statusline+=%8*\ %y\                                 " FileType
-set statusline+=%7*\ %{(&fenc!=''?&fenc:&enc)}\[%{&ff}]\ " Encoding & Fileformat
-set statusline+=%8*\ %-3(%{FileSize()}%)                 " File size
-set statusline+=%0*\ %3p%%\ \ %l:\ %3c\                 " Rownumber/total (%)
-" hi User1 ctermfg=007
-" hi User2 ctermfg=008
-" hi User3 ctermfg=008
-" hi User4 ctermfg=008
-" hi User5 ctermfg=008
-" hi User7 ctermfg=008
-" hi User8 ctermfg=008
-" hi User9 ctermfg=007
-" ==================================
-" End set statusline
-" ==================================
+" Nerdtree configure
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" start or hidden NERDTree
+nnoremap <C-n> :NERDTreeToggle<CR>
+" Open the existing NERDTree on each new tab.
+autocmd BufWinEnter * silent NERDTreeMirror
