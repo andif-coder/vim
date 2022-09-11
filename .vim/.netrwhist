@@ -1,3 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
-let g:netrw_dirhist_1='/home/wjchen/.vim'
+let g:netrw_dirhistcnt =8
+let g:netrw_dirhist_8='/Users/chenweijie/workspace/git_vim/.git/refs/heads'
+let g:netrw_dirhist_7='/Users/chenweijie/workspace/git_vim/.git/refs'
+let g:netrw_dirhist_6='/Users/chenweijie/workspace/git_vim/.git'
+let g:netrw_dirhist_5='/Users/chenweijie/workspace/git_vim'
+let g:netrw_dirhist_4='/Users/chenweijie/workspace'
+let g:netrw_dirhist_3='/Users/chenweijie/Music/Music/Music Library.musiclibrary'
+let g:netrw_dirhist_2='/Users/chenweijie/Music/Music'
+let g:netrw_dirhist_1='/Users/chenweijie/Music'
