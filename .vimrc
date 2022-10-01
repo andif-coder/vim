@@ -31,6 +31,8 @@ nnoremap <leader>m :tabn<CR>
 nnoremap <leader>b :tabo<CR> 
 " Close current table
 nnoremap <leader>c :tabc<CR> 
+" 当esc的时候取消高亮
+nnoremap <esc> :nohl<cr>
 
 " Jump to the next match and place it in the center of the screen
 nnoremap = nzz
