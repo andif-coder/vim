@@ -21,6 +21,7 @@ set softtabstop=4
 set tabstop=4
 set ignorecase " case insensitive
 set laststatus=2 " always display statusline
+set tags=tags;/
 filetype on " Open file type detection
 let mapleader=" " " Set <leader> = <space>
 " Pre table
@@ -38,6 +39,19 @@ nnoremap <esc> :nohl<cr>
 nnoremap = nzz
 " Jump to the pre match and place it in the center of the screen
 nnoremap - Nzz
+
+" Search for selected text, forwards or backwards.
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+
 " Path auto Complete
 imap <C-F> <C-X><C-F>
 " When the completion menu is opened, c-j, k are selected up and down
