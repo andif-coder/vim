@@ -24,6 +24,17 @@ set laststatus=2 " always display statusline
 set tags=tags;/
 filetype on " Open file type detection
 let mapleader=" " " Set <leader> = <space>
+
+" adjust window
+map <UP> <ESC><C-W>-
+map <DOWN> <ESC><C-W>+
+map <LEFT> <ESC><C-W><
+map <Right> <ESC><C-W>>
+map <S-UP> <ESC><C-W>5-
+map <S-DOWN> <ESC><C-W>5+
+map <S-LEFT> <ESC><C-W>5<
+map <S-Right> <ESC><C-W>5>
+
 " Pre table
 nnoremap <leader>n :tabp<CR> 
 " Next table
