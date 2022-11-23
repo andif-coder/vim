@@ -34,6 +34,8 @@ map <S-UP> <ESC><C-W>5-
 map <S-DOWN> <ESC><C-W>5+
 map <S-LEFT> <ESC><C-W>5<
 map <S-Right> <ESC><C-W>5>
+map <S-j> 5j
+map <S-k> 5k
 
 " Pre table
 nnoremap <leader>n :tabp<CR> 
