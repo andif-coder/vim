@@ -19,6 +19,7 @@ set smartindent " smart alignment
 set shiftwidth=4 " indent = 2
 set softtabstop=4
 set tabstop=4
+set expandtab
 set ignorecase " case insensitive
 set laststatus=2 " always display statusline
 set tags=tags;/
