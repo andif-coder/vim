@@ -49,9 +49,9 @@ nnoremap <leader>c :tabc<CR>
 " 当esc的时候取消高亮
 nnoremap <esc> :nohl<cr>
 " add double quotation mark
-nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
+nnoremap <leader>" viw<esc>a"<esc>hviwo<esc>i"<esc>lel
 " add quotation mark
-nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>hviwo<esc>i'<esc>lel
 
 " Jump to the next match and place it in the center of the screen
 " nnoremap = nzz
