@@ -52,6 +52,10 @@ nnoremap <esc> :nohl<cr>
 nnoremap <leader>" viw<esc>a"<esc>hviwo<esc>i"<esc>lel
 " add quotation mark
 nnoremap <leader>' viw<esc>a'<esc>hviwo<esc>i'<esc>lel
+" wrap whatever text you have visually selected in double quotes
+vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
+" wrap whatever text you have visually selected in single quotes
+vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
 
 " Jump to the next match and place it in the center of the screen
 " nnoremap = nzz
