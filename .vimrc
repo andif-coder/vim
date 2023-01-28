@@ -24,7 +24,7 @@ set ignorecase " case insensitive
 set laststatus=2 " always display statusline
 set tags=tags;/
 filetype on " Open file type detection
-let mapleader=" " " Set <leader> = <space>
+let mapleader="-" " Set <leader> = <space>
 
 " adjust window
 map <UP> <ESC><C-W>-
@@ -54,9 +54,9 @@ nnoremap <leader>" viw<esc>a"<esc>hbi"<esc>lel
 nnoremap <leader>' viw<esc>a'<esc>hbi'<esc>lel
 
 " Jump to the next match and place it in the center of the screen
-nnoremap = nzz
+" nnoremap = nzz
 " Jump to the pre match and place it in the center of the screen
-nnoremap - Nzz
+" nnoremap - Nzz
 
 " Search for selected text, forwards or backwards.
 vnoremap <silent> * :<C-U>
