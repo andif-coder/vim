@@ -39,13 +39,13 @@ map <S-j> 5j
 map <S-k> 5k
 
 " Pre table
-nnoremap <leader>n :tabp<CR> 
+nnoremap <space>n :tabp<CR> 
 " Next table
-nnoremap <leader>m :tabn<CR> 
+nnoremap <space>m :tabn<CR> 
 " Close all tables except for current
-nnoremap <leader>b :tabo<CR> 
+nnoremap <space>b :tabo<CR> 
 " Close current table
-nnoremap <leader>c :tabc<CR> 
+nnoremap <space>c :tabc<CR> 
 " 当esc的时候取消高亮
 nnoremap <esc> :nohl<cr>
 " add double quotation mark
