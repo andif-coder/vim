@@ -56,6 +56,18 @@ nnoremap <leader>' viw<esc>a'<esc>hviwo<esc>i'<esc>lel
 vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
 " wrap whatever text you have visually selected in single quotes
 vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
+" inside next parentheses
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap in{ :<c-u>normal! f{vi{<cr>
+" inside last parentheses
+onoremap il( :<c-u>normal! F)vi(<cr>
+onoremap il{ :<c-u>normal! F}vi{<cr>
+" around next parentheses
+onoremap an( :<c-u>normal! f(va(<cr>
+onoremap an{ :<c-u>normal! f{va{<cr>
+" around last parentheses
+onoremap al( :<c-u>normal! F)va(<cr>
+onoremap al{ :<c-u>normal! F}va{<cr>
 
 " Jump to the next match and place it in the center of the screen
 " nnoremap = nzz
