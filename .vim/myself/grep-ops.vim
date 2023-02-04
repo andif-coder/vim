@@ -1,10 +1,10 @@
 " grep in vim
 " nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cword>")) . " ."<cr>:copen<cr><c-l><cr>
 " nnoremap <leader>G :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr><c-l><cr>
-nnoremap <leader>g :set operatorfunc=GrepOpsVis<cr>g@
-vnoremap <leader>g :<c-u>call GrepOpsVis(visualmode())<cr>
+nnoremap <leader>g :set operatorfunc=<SID>GrepOpsVis<cr>g@
+vnoremap <leader>g :<c-u>call <SID>GrepOpsVis(visualmode())<cr>
 
-function! GrepOpsVis(type)
+function! s:GrepOpsVis(type)
     let saved_unnamed_register = @@
     if a:type ==# 'v' " viw<leader>g
         " echom "normal v"
@@ -21,7 +21,7 @@ function! GrepOpsVis(type)
     endif
     " echom @@
     echom shellescape(@@)
-    silent execute "grep! -R " . shellescape(expand(shellescape(@@))) . " ."
+    silent execute "grep! -R " . shellescape(@@) . " ."
     copen
     redraw!
     let @@ = saved_unnamed_register
