@@ -52,6 +52,9 @@ nnoremap <esc> :nohl<cr>
 nnoremap <leader>" viw<esc>a"<esc>hviwo<esc>i"<esc>lel
 " add quotation mark
 nnoremap <leader>' viw<esc>a'<esc>hviwo<esc>i'<esc>lel
+" grep in vim
+nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cword>")) . " ."<cr>:copen<cr>                                              
+nnoremap <leader>G :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
 " wrap whatever text you have visually selected in double quotes
 vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
 " wrap whatever text you have visually selected in single quotes
