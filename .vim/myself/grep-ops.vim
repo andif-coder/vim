@@ -5,6 +5,7 @@ nnoremap <leader>g :set operatorfunc=GrepOpsVis<cr>g@
 vnoremap <leader>g :<c-u>call GrepOpsVis(visualmode())<cr>
 
 function! GrepOpsVis(type)
+    let saved_unnamed_register = @@
     if a:type ==# 'v' " viw<leader>g
         " echom "normal v"
         execute "normal! `<v`>y"
@@ -23,4 +24,5 @@ function! GrepOpsVis(type)
     silent execute "grep! -R " . shellescape(expand(shellescape(@@))) . " ."
     copen
     redraw!
+    let @@ = saved_unnamed_register
 endfunction
