@@ -1,5 +1,5 @@
 setlocal noswapfile
-set autochdir
+" set autochdir
 set matchtime=2
 set magic
 set foldenable
@@ -52,9 +52,6 @@ nnoremap <esc> :nohl<cr>
 nnoremap <leader>" viw<esc>a"<esc>hviwo<esc>i"<esc>lel
 " add quotation mark
 nnoremap <leader>' viw<esc>a'<esc>hviwo<esc>i'<esc>lel
-" grep in vim
-nnoremap <leader>g :silent execute "grep! -R " . shellescape(expand("<cword>")) . " ."<cr>:copen<cr>                                              
-nnoremap <leader>G :silent execute "grep! -R " . shellescape(expand("<cWORD>")) . " ."<cr>:copen<cr>
 " wrap whatever text you have visually selected in double quotes
 vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
 " wrap whatever text you have visually selected in single quotes
@@ -134,7 +131,7 @@ nnoremap <C-d> :! ctags -R *<CR>
 nnoremap <C-g> :Tlist<CR>
 
 " scheme
-colorscheme deus
+colorscheme deus 
 
 " Nerdtree configure
 " Start NERDTree and put the cursor back in the other window.
@@ -230,3 +227,5 @@ func SetTitle()
     endif
 		normal 28G
 endfunc
+
+source ~/.vim/myself/grep-ops.vim
