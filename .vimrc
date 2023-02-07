@@ -38,6 +38,7 @@ map <S-Right> <ESC><C-W>5>
 map <S-j> 5j
 map <S-k> 5k
 
+nnoremap <leader>n :setlocal number!<cr>
 " Pre table
 nnoremap <space>n :tabp<CR> 
 " Next table
