@@ -228,5 +228,3 @@ func SetTitle()
     endif
 		normal 28G
 endfunc
-
-source ~/.vim/myself/grep-ops.vim
