@@ -164,9 +164,44 @@ map <F9> :call Run()<CR>
 func! Run()
     exec "w"
     exec "!rm -f %<"
-    exec "!g++-11 -std=c++20 -Wall % -o %<"
+    exec "!g++-13 -std=c++20 -Wall % -o %<"
     exec "!./%<"
 endfunc
+
+" new tab when ctrl-]
+function! TagInNewTabCtrl()
+  let tag = expand('<cword>')
+  execute 'tabnew'
+  execute 'tag' tag
+endfunction
+nnoremap <C-]> :call TagInNewTabCtrl()<CR>
+
+" g]
+function! TagInNewTab()
+  let tag = expand('<cword>')
+  if tag == ""
+    return
+  endif
+
+  " Execute the command in a new tab. Close the tab again if the command fails.
+  execute 'tabnew'
+  let newTab = tabpagenr()
+  try
+    execute 'tjump ' . tag
+  catch
+    " If the command failed, close the new tab again.
+    execute 'tabclose'
+    return
+  endtry
+
+  " If the new tab is not at the top of the tab list, it means that the jump command
+  " took us to an existing tab. In that case, we close the empty tab we close the empty tab we created earlier.
+  if tabpagenr() != newTab
+    execute newTab . 'tabclose'
+  endif
+endfunction
+
+nnoremap g] :call TagInNewTab()<CR>
 
 " Bracket completion
 " inoremap ( ()<ESC>i
