@@ -102,7 +102,7 @@ imap <expr><c-k> pumvisible()?"\<C-P>":"\<esc>"
 " plugin
 call plug#begin('~/.vim/plugged')
 	" fzf plugin
-	Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 	Plug 'junegunn/fzf.vim'
 	" taglist plugin
 	Plug 'yegappan/taglist'
@@ -122,6 +122,12 @@ call plug#end()
 " fzf configure
 nnoremap <C-p> :Files<CR>
 nnoremap <C-b> :Buffers<CR>
+let g:fzf_action = {
+\ 'ctrl-t': 'tab split',
+\ 'ctrl-x': 'split',
+\ 'ctrl-v': 'vsplit'
+\ }
+
 
 " taglist configure
 let Tlist_Ctags_Cmd = '/opt/homebrew/bin/ctags' 
